@@ -22,7 +22,11 @@ function addCytoscapeListeners(){
   // hide handle when source node moved
   this.addListener( cy, 'position', 'node', e => {
     if( e.target.same( this.sourceNode ) ){
-      this.hide();
+      if( options.repositionHandleWhenNodeMoves ){
+        this.setHandleFor(this.sourceNode); // repositions the handle if is already exists
+      } else {
+        this.hide();
+      }
     }
   } );
 
